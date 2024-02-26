@@ -3,8 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router';
 
-function BookingForm({ availableTimes, upTime, confirmForm }) {
-  const navigate = useNavigate()
+export function BookingForm({ availableTimes, upTime, confirmForm }) {
   const formik = useFormik({
     initialValues: {
       date: '',
@@ -31,13 +30,14 @@ function BookingForm({ availableTimes, upTime, confirmForm }) {
   }, [formik.values.date, upTime]);
 
   return (
-    <form onSubmit={formik.handleSubmit} style={{ display: 'grid', maxWidth: '200px', gap: '20px' }}>
+    <form onSubmit={formik.handleSubmit} style={{ display: 'grid', maxWidth: '200px', gap: '20px', marginBottom: '2%', margin: '2% auto' }}>
       <label htmlFor="res-date">Choose date</label>
       <input
         type="date"
         id="res-date"
         name="date"
         onChange={formik.handleChange}
+        aria-required="true"
         value={formik.values.date}
       />
       {formik.errors.date ? <div style={{ color: 'red' }}>{formik.errors.date}</div> : null}
@@ -47,6 +47,7 @@ function BookingForm({ availableTimes, upTime, confirmForm }) {
         id="res-time"
         name="time"
         onChange={formik.handleChange}
+        aria-required="true"
         value={formik.values.time}
       >
         {availableTimes.times.map((time) => (
@@ -62,10 +63,11 @@ function BookingForm({ availableTimes, upTime, confirmForm }) {
         name="guests"
         onChange={formik.handleChange}
         value={formik.values.guests}
+        aria-required="true"
         min="1"
         max="10"
       />
-      {formik.errors.guests ? <div style={{ color: 'red' }}>{formik.errors.guests}</div> : null}
+      {formik.errors.guests ? <div data-testid="guests-error" style={{ color: 'red' }}>{formik.errors.guests}</div> : null}
 
       <label htmlFor="occasion">Occasion</label>
       <select
@@ -73,6 +75,7 @@ function BookingForm({ availableTimes, upTime, confirmForm }) {
         name="occasion"
         onChange={formik.handleChange}
         value={formik.values.occasion}
+        aria-required="true"
       >
         <option value="Birthday">Birthday</option>
         <option value="Anniversary">Anniversary</option>
@@ -138,7 +141,7 @@ export default function BookingPage() {
 
   return (
     <div>
-      <h1>BookingPage</h1>
+      <h1 style={{ textAlign: "center"}}>BookingPage</h1>
       <BookingForm availableTimes={availableTimes} upTime={upTime} confirmForm={confirmForm}/>
     </div>
   )
