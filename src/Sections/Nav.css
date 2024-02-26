@@ -1,0 +1,26 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  list-style: none;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+    padding: 20px 0px;
+}
+
+.navbar a {
+    font-family: 'Karla';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 23px;
+    padding: 0px 20px;
+    text-transform: uppercase;
+}
+
